@@ -29,7 +29,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-if ( $conn->query($query)== TRUE){
+if ( $conn->query($query)){
     if ($result->num_rows > 0) {
       $row = $result->fetch_assoc();
       
