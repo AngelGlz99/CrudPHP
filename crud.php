@@ -22,20 +22,18 @@ validar();
     <a href="logout.php" >Log out</a>
 <?php
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+$pdo = new PDO('mysql:host=localhost;dbname=' . $dbname, $username, $password);
+
 
 $sql = "SELECT column1, column2, column3, column4, column5 FROM table1";
-$result = $conn->query($sql);
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
 define("TD", "</td>\n\t<td>");
 
-if ($result->num_rows > 0) {
+if ($stmt->rowCount() > 0) {
   echo "<table border='1'><tr><th>ID</th><th>Name</th><th>Fecha</th><th>Numero</th><th>NumeroDouble</th><th>Eliminar</th><th>Modificar</th></tr>";
   // output data of each row
-  while($row = $result->fetch_assoc()) {
+  while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "\n<tr>\n\t<td>".$row["column1"].TD.$row["column2"].TD.$row["column3"].TD.$row["column4"].TD.$row["column5"]."</td>";
     echo "<td>";
     echo "<form action='eliminar.php' method='post'>";
@@ -57,7 +55,6 @@ if ($result->num_rows > 0) {
 } else {
   echo "0 results";
 }
-$conn->close();
 ?>
 <br>
 <form action="insertar.php" method="post">
