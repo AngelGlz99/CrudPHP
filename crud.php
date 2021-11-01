@@ -66,6 +66,7 @@ if ($stmt->rowCount() > 0) {
   Fecha: <input type="date" name="fecha" id="" value="1975-06-23"><br>
   Numero: <input type="number" name="numero" id="" value=""><br> 
   Num.Double: <input type="number" name="numdouble" id="" value=""><br>
+  <input type="hidden" name="action" value="1">
   <br>
   <input type="submit" value="Aceptar"><br> 
 </fieldset>
